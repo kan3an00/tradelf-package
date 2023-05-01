@@ -20,6 +20,7 @@ from typing import Any
 
 import pandas as pd
 import tulipy as ti
+import btalib
 
 from blankly.indicators.utils import check_series, convert_to_numpy
 
@@ -70,3 +71,25 @@ def sum_period(data, period, use_series=False) -> Any:
     data = convert_to_numpy(data)
     maximum = ti.sum(data, period)
     return pd.Series(maximum) if use_series else maximum
+
+def avg_price(open_data, high_data, low_data, close_data, period, use_series=False) -> Any:
+    if check_series(open_data):
+        use_series = True
+    open_data = convert_to_numpy(open_data)
+    high_data = convert_to_numpy(high_data)
+    low_data = convert_to_numpy(low_data)
+    close_data = convert_to_numpy(close_data)
+    avg_price = ti.avgprice(open_data, high_data, low_data, close_data, period)
+    return pd.Series(avg_price) if use_series else avg_price
+
+def med_price(high_data, low_data):
+    high_data = convert_to_numpy(high_data)
+    low_data = convert_to_numpy(low_data)
+    med_price = ti.medprice(high_data, low_data)
+    return pd.Series(med_price)
+
+def midpoint(high_data, low_data):
+    high_data = list(high_data)
+    low_data = list(low_data)
+    btalib.midprice(high_data, low_data)
+    return pd.Series(med_price)

@@ -39,6 +39,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 import tulipy as ti
+from finta import TA
 
 from blankly.indicators.utils import check_series, convert_to_numpy
 
@@ -171,3 +172,14 @@ def roc(data, period=10, use_series=False):
     roc = ti.roc(data, period)
     return pd.Series(roc) if use_series else roc
 
+def ichimoku(high_data, low_data, close_data, use_series=False):
+    if check_series(data):
+        use_series = True
+    high_data = convert_to_numpy(high_data)
+    low_data = convert_to_numpy(low_data)
+    close_data = convert_to_numpy(close_data)
+    # combine in a dictionary variable
+    data = {'high': high_data, 'low': low_data, 'close': close_data}
+    # pass the dictionary variable to the function
+    ichimoku = TA.ICHIMOKU(data)
+    return pd.Series(ichimoku) if use_series else ichimoku
