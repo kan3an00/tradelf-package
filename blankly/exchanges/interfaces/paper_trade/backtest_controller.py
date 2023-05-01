@@ -1175,45 +1175,53 @@ class BackTestController(ABCBacktestController):  # circular import to type mode
             # This is where we end the backtesting time
             stop_clock = time.time()
 
-            internal_backtest_viewer()
             # TODO this code does a good job uploading finished backtests to the platform. This should be fixed to
             #  allow configuration in the settings to reference any self hosted version of the platform
-            # try:
-            #     json_file = json.loads(open('./blankly.json').read())
-            #     api_key = json_file['api_key']
-            #     api_pass = json_file['api_pass']
-            #     # Need this to generate the URL
-            #     # Need this to know where to post to
-            #     model_id = json_file['model_id']
-            #
-            #     requests.post(f'https://events.blankly.finance/v1/backtest/result', json=platform_result, headers={
-            #         'api_key': api_key,
-            #         'api_pass': api_pass,
-            #         'model_id': model_id
-            #     })
-            #
-            #     requests.post(f'https://events.blankly.finance/v1/backtest/status', json={
-            #         'successful': True,
-            #         'status_summary': 'Completed',
-            #         'status_details': '',
-            #         'time_elapsed': stop_clock - start_clock,
-            #         'backtest_id': platform_result['backtest_id']
-            #     }, headers={
-            #         'api_key': api_key,
-            #         'api_pass': api_pass,
-            #         'model_id': model_id
-            #     })
-            #
-            #     import webbrowser
-            #
-            #     link = f'https://app.blankly.finance/{api_key}/{model_id}/{platform_result["backtest_id"]}' \
-            #            f'/backtest'
-            #     webbrowser.open(
-            #         link
-            #     )
-            #     info_print(f'View your backtest here: {link}')
-            # except (FileNotFoundError, KeyError):
-            #     internal_backtest_viewer()
+            try:
+                requests.post(f'http://localhost:8000/system', json=platform_result)
+            
+                requests.post(f'http://localhost:8000/system', json={
+                    'successful': True,
+                    'status_summary': 'Completed',
+                    'status_details': '',
+                    'time_elapsed': stop_clock - start_clock,
+                    'backtest_id': platform_result['backtest_id']
+                })
+                # json_file = json.loads(open('./blankly.json').read())
+                # api_key = json_file['api_key']
+                # api_pass = json_file['api_pass']
+                # # Need this to generate the URL
+                # # Need this to know where to post to
+                # model_id = json_file['model_id']
+            
+                # requests.post(f'https://events.blankly.finance/v1/backtest/result', json=platform_result, headers={
+                #     'api_key': api_key,
+                #     'api_pass': api_pass,
+                #     'model_id': model_id
+                # })
+            
+                # requests.post(f'https://events.blankly.finance/v1/backtest/status', json={
+                #     'successful': True,
+                #     'status_summary': 'Completed',
+                #     'status_details': '',
+                #     'time_elapsed': stop_clock - start_clock,
+                #     'backtest_id': platform_result['backtest_id']
+                # }, headers={
+                #     'api_key': api_key,
+                #     'api_pass': api_pass,
+                #     'model_id': model_id
+                # })
+            
+                # import webbrowser
+            
+                # link = f'https://app.blankly.finance/{api_key}/{model_id}/{platform_result["backtest_id"]}' \
+                #        f'/backtest'
+                # webbrowser.open(
+                #     link
+                # )
+                # info_print(f'View your backtest here: {link}')
+            except (FileNotFoundError, KeyError):
+                internal_backtest_viewer()
 
         # Finally, write the figures in
         result_object.figures = figures
