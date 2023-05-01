@@ -16,6 +16,24 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+"""
+    Oscillator wrappers
+    Copyright (C) 2021 Brandon Fan
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
+
 from typing import Any
 
 import numpy as np
@@ -101,3 +119,55 @@ def stochastic_rsi(data, period=14, smooth_pct_k=3, smooth_pct_d=3):
     stochrsi_D = stochrsi_K.rolling(smooth_pct_d).mean()
 
     return round(rsi_values, 2), round(stochrsi_K * 100, 2), round(stochrsi_D * 100, 2)
+
+def adx(high_data, low_data, close_data, period=14, use_series=False):
+    if check_series(high_data) or check_series(low_data) or check_series(close_data):
+        use_series = True
+    high_data = convert_to_numpy(high_data)
+    low_data = convert_to_numpy(low_data)
+    close_data = convert_to_numpy(close_data)
+    adx = ti.adx(high_data, low_data, close_data, period)
+    return pd.Series(adx) if use_series else adx
+
+def bop(open_data, high_data, low_data, close_data, use_series=False):
+    if check_series(open_data) or check_series(high_data) or check_series(low_data) or check_series(close_data):
+        use_series = True
+    open_data = convert_to_numpy(open_data)
+    high_data = convert_to_numpy(high_data)
+    low_data = convert_to_numpy(low_data)
+    close_data = convert_to_numpy(close_data)
+    bop = ti.bop(open_data, high_data, low_data, close_data)
+    return pd.Series(bop) if use_series else bop
+
+def cci(high_data, low_data, close_data, period=14, use_series=False):
+    if check_series(high_data) or check_series(low_data) or check_series(close_data):
+        use_series = True
+    high_data = convert_to_numpy(high_data)
+    low_data = convert_to_numpy(low_data)
+    close_data = convert_to_numpy(close_data)
+    cci = ti.cci(high_data, low_data, close_data, period)
+    return pd.Series(cci) if use_series else cci
+
+def dx(high_data, low_data, close_data, period=14, use_series=False):
+    if check_series(high_data) or check_series(low_data) or check_series(close_data):
+        use_series = True
+    high_data = convert_to_numpy(high_data)
+    low_data = convert_to_numpy(low_data)
+    close_data = convert_to_numpy(close_data)
+    dx = ti.dx(high_data, low_data, close_data, period)
+    return pd.Series(dx) if use_series else dx
+
+def mom(data, period=10, use_series=False):
+    if check_series(data):
+        use_series = True
+    data = convert_to_numpy(data)
+    mom = ti.mom(data, period)
+    return pd.Series(mom) if use_series else mom
+
+def roc(data, period=10, use_series=False):
+    if check_series(data):
+        use_series = True
+    data = convert_to_numpy(data)
+    roc = ti.roc(data, period)
+    return pd.Series(roc) if use_series else roc
+
