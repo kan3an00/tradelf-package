@@ -41,6 +41,7 @@ setup(
         'python-binance >= 1.0.15',
         'requests >= 2.26.0',
         'websocket-client >= 1.2.1',
+        'bta-lib >= 1.0.0'
     ],
     classifiers=[
         # Possible: "3 - Alpha", "4 - Beta" or "5 - Production/Stable"

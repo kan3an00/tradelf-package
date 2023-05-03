@@ -88,8 +88,5 @@ def med_price(high_data, low_data):
     med_price = ti.medprice(high_data, low_data)
     return pd.Series(med_price)
 
-def midpoint(high_data, low_data):
-    high_data = list(high_data)
-    low_data = list(low_data)
-    btalib.midprice(high_data, low_data)
-    return pd.Series(med_price)
+def midpoint(data) -> Any:
+    return btalib.midpoint(data)
