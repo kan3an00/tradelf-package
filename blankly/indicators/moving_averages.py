@@ -113,3 +113,11 @@ def donchian():
 
 def fibr():
     pass
+
+def macdext():
+    pass
+
+def sar(high_data, low_data) -> Any:
+    sar = btalib.sar(high_data, low_data)
+    sar_values = sar.df['sar'].values[-1]
+    return sar_values
