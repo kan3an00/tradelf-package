@@ -33,8 +33,7 @@ setup(
         'python-binance >= 1.0.15',
         'requests >= 2.26.0',
         'websocket-client >= 1.2.1',
-        'bta-lib >= 1.0.0',
-       ' metaapi-cloud-sdk'
+        'bta-lib >= 1.0.0'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
