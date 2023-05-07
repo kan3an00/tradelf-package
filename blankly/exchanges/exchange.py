@@ -22,13 +22,8 @@ import blankly
 from blankly.exchanges.abc_exchange import ABCExchange
 from blankly.exchanges.auth.utils import write_auth_cache
 from blankly.exchanges.interfaces.abc_exchange_interface import ABCExchangeInterface
-from blankly.exchanges.interfaces.coinbase_pro.coinbase_pro_interface import CoinbaseProInterface
-from blankly.exchanges.interfaces.oanda.oanda_interface import OandaInterface
-from blankly.exchanges.interfaces.ftx.ftx_interface import FTXInterface
+from blankly.exchanges.interfaces.metaapi.metaapi_interface import MetaApiInterface
 from blankly.exchanges.interfaces.alpaca.alpaca_interface import AlpacaInterface
-from blankly.exchanges.interfaces.binance.binance_interface import BinanceInterface
-from blankly.exchanges.interfaces.kucoin.kucoin_interface import KucoinInterface
-from blankly.exchanges.interfaces.okx.okx_interface import OkxInterface
 
 
 class Exchange(ABCExchange, abc.ABC):
@@ -68,20 +63,10 @@ class Exchange(ABCExchange, abc.ABC):
         The core functions that creates the interface based on the exchange type & automatically caches
         """
         self.calls = calls
-        if self.__type == "coinbase_pro":
-            self.interface = CoinbaseProInterface(self.__type, calls)
-        elif self.__type == "binance":
-            self.interface = BinanceInterface(self.__type, calls)
-        elif self.__type == "alpaca":
+        if self.__type == "alpaca":
             self.interface = AlpacaInterface(self.__type, calls)
-        elif self.__type == "ftx":
-            self.interface = FTXInterface(self.__type, calls)
-        elif self.__type == "oanda":
-            self.interface = OandaInterface(self.__type, calls)
-        elif self.__type == "kucoin":
-            self.interface = KucoinInterface(self.__type, calls)
-        elif self.__type == "okx":
-            self.interface = OkxInterface(self.__type, calls)
+        elif self.__type == "metaapi":
+            self.interface = MetaApiInterface(self.__type, calls)
 
         blankly.reporter.export_used_exchange(self.__type)
 
