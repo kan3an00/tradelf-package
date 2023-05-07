@@ -13,6 +13,10 @@ twine upload dist/*
 setup(
     name='blankly',  # How you named your package folder (MyLib)
     packages=find_packages(),
+    # packages=['blankly'],  # Potentially should be the same thing as name
+    version='v1.18.25',
+    license='lgpl-3.0',  # Licenses: https://help.github.com/articles/licensing-a-repository
+    description='Rapidly build, backtest & deploy trading bots',  # Give a short description about your library
     long_description=long_description,
     long_description_content_type='text/markdown',
     ext_modules=[
@@ -21,6 +25,10 @@ setup(
     author='blankly',
     entry_points={'console_scripts': ['blankly_old = blankly.deployment.cli:main',
                                       'blankly = blankly.deployment.new_cli:main']},
+    author_email='contact@blankly.finance',
+    url='https://github.com/Blankly-Finance/Blankly',  # Could be github or website
+    # download_url='https://github.com/EmersonDove/Blankly/archive/v0.1.1-alpha.tar.gz',
+    keywords=['Crypto', 'Stocks', 'Quantitative Finance', 'Exchanges', 'Bot'],  # Keywords
     install_requires=[
         'questionary >= 1.10.0',
         'yaspin >= 2.1.0',
@@ -36,6 +44,7 @@ setup(
         'bta-lib >= 1.0.0'
     ],
     classifiers=[
+        # Possible: "3 - Alpha", "4 - Beta" or "5 - Production/Stable"
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Intended Audience :: Financial and Insurance Industry',
