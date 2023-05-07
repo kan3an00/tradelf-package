@@ -56,7 +56,10 @@ def load_auth(exchange_type, keys_file=None, name=None):
 
     auth_object = load_json(keys_file)
     try:
-        exchange_keys = auth_object[exchange_type]
+        if exchange_type == 'metaapi':
+            return auth_object[exchange_type]
+        else:
+            exchange_keys = auth_object[exchange_type]
     except KeyError as e:
         raise KeyError(f"Cannot find exchange {e} the keys file.")
     if name is None:
