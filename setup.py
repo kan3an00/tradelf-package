@@ -14,7 +14,7 @@ setup(
     name='blankly',  # How you named your package folder (MyLib)
     packages=find_packages(),
     # packages=['blankly'],  # Potentially should be the same thing as name
-    version='v1.18.25',
+    version='v1.18.24-beta',
     license='lgpl-3.0',  # Licenses: https://help.github.com/articles/licensing-a-repository
     description='Rapidly build, backtest & deploy trading bots',  # Give a short description about your library
     long_description=long_description,
@@ -41,7 +41,7 @@ setup(
         'python-binance >= 1.0.15',
         'requests >= 2.26.0',
         'websocket-client >= 1.2.1',
-        'bta-lib >= 1.0.0'
+        'bta-lib >= 1.0.0',
     ],
     classifiers=[
         # Possible: "3 - Alpha", "4 - Beta" or "5 - Production/Stable"
