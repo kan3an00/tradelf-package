@@ -34,7 +34,7 @@ setup(
         'requests >= 2.26.0',
         'websocket-client >= 1.2.1',
         'bta-lib >= 1.0.0',
-       ' metaapi-cloud-sdk >= 20.9.1'
+       ' metaapi-cloud-sdk'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
