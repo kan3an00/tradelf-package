@@ -11,23 +11,9 @@ class MetaApi(Exchange):
 
         # Load the auth from the keys file
         auth = load_auth("metaapi", keys_path)
-        options = {}
         MetaApiCalls.enable_logging()
-        loop = asyncio.new_event_loop()
-        calls = MetaApiCalls(token=auth["API_KEY"], opts=options)
-        try:
-            account = loop.create_task(calls.metatrader_account_api.get_account('5b5582fc-87b0-4f43-a437-79bd1b4cd706'))
-        except Exception as e:
-            raise LookupError("MetaApi API call failed")
-        try:
-            if account.state != 'DEPLOYED':
-                warnings.warn('Your MetaApi account is indicated as blocked for trading....')
-        except KeyError:
-            raise LookupError("alpaca API call failed")
-        connection = account.get_streaming_connection()
-        loop.create_task(connection.connect())
-        loop.create_task(connection.wait_synchronized({'timeoutInSeconds': 600}))
-        loop.run_until_complete()
+        calls = MetaApiCalls(token=auth["API_KEY"])
+        
         # Always finish the method with this function
         super().construct_interface_and_cache(calls)
 
