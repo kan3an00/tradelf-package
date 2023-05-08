@@ -179,7 +179,3 @@ class Exchange(ABCExchange, abc.ABC):
         Generally this will be used to get a report of performance of a symbol on an exchange.
         """
         pass
-
-    @abc.abstractmethod
-    def get_direct_calls(self):
-        pass
