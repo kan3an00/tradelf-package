@@ -17,8 +17,8 @@
 """
 import blankly.utils.utils
 import blankly.data as data
-from blankly.exchanges.interfaces.coinbase_pro.coinbase_pro import CoinbasePro
 from blankly.exchanges.interfaces.metaapi.metaapi import MetaApi
+from blankly.exchanges.interfaces.coinbase_pro.coinbase_pro import CoinbasePro
 from blankly.exchanges.interfaces.binance.binance import Binance
 from blankly.exchanges.interfaces.alpaca.alpaca import Alpaca
 from blankly.exchanges.interfaces.oanda.oanda import Oanda

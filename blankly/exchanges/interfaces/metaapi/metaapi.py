@@ -2,8 +2,6 @@ from metaapi_cloud_sdk import MetaApi as MetaApiCalls
 
 from blankly.exchanges.exchange import Exchange
 from blankly.exchanges.auth.utils import load_auth
-import asyncio
-import warnings
 
 class MetaApi(Exchange):
     def __init__(self, portfolio_name=None, keys_path="keys.json", settings_path=None):
